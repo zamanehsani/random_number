@@ -4,9 +4,9 @@ import './App.css'
 function App() {
 
   return (
-    <>
-     <p>this is </p>
-    </>
+    <div className='bg-slate-600 w-full h-screen'>
+     <p >this is </p>
+    </div>
   )
 }
 
