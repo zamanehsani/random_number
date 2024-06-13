@@ -1,48 +1,34 @@
-
 import './App.css'
+import InputCard from './components/user_input';
+import GraphWindow from './components/graph';
+import ChatWindow from './components/chat';
+import RankingWindow from './components/ranking';
+
 
 function App() {
 
+
   return (
-    <main className='flex flex-col bg-slate-700 h-screen p-2 items-center '>
-      {/* The entire page is divided into two section of upper part for the user input and the status with the graph
-      and the lower part is for the ranking and chat window. */}
-
-
-      {/* the upper section */}
-      <div className='max-w-2x1 my-2 p-2'>
-        {/* this section is also divided into two part of right and left.  */}
-          <div className='flex flex-row gap-x-4 bg-slate-50'>
-            {/* the user input window */}
-            <div className='basis-1/3  h-72'>
-              <p>this is the user input window</p>
-            </div>
-            
-            {/* the graph and status window */}
-            <div className='basis-full h-72'>
-              <p>this is the graph part graph</p>
-            </div>
-          </div>
-      </div>
-
-      {/* the lower section */}
-      <div className='max-w-2x1 my-2 p-2'>
-        {/* this section is also divided into two part of right and left.  */}
-          <div className='flex flex-row gap-x-4 bg-slate-50'>
-            {/* the user input window */}
-            <div className=' h-72'>
-              <p>this is the ranking window</p>
-            </div>
-            
-            {/* the graph and status window */}
-            <div className=' h-72'>
-              <p>this is the chat window</p>
-            </div>
-          </div>
-      </div>
-     
-      
-    </main>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-300 p-4">
+      <main className="w-full max-w-screen-xl flex flex-col gap-2">
+        <div className="flex flex-wrap w-full">
+          <section className="w-full md:w-1/3 p-2">
+            <InputCard />
+          </section>
+          <section className="w-full md:w-2/3 p-2">
+            <GraphWindow />
+          </section>
+        </div>
+        <div className="flex flex-wrap w-full">
+          <section className="w-full md:w-1/2 p-2">
+            <RankingWindow />
+          </section>
+          <section className="w-full md:w-1/2 p-2">
+            <ChatWindow />
+          </section>
+        </div>
+      </main>
+    </div>
   )
 }
 
