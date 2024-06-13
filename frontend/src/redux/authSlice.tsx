@@ -4,11 +4,13 @@ import axios from 'axios';
 
 export interface StateType {
     user_name?: string; 
+    points?:number;
     isAuthenticated?: boolean;
   }
 
 const initialState:StateType = {
     user_name: "",
+    points:1000,
     isAuthenticated:false
 };
 

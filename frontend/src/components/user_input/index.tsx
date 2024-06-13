@@ -1,23 +1,23 @@
-import { useState } from "react";
-import Auth from "./auth";
 
+import {useSelector} from "react-redux";
+import Auth from "./auth";
 import Inputs from "./input_controls";
 import CurrentRound from "./current_round";
+import Speed from "./slider";
+
 
 function InputCard() {
-  const [auth, setAuth] = useState(false);
+  const {isAuthenticated} = useSelector((state:any) => state.auth);
 
   return ( <>
-  
     {/* if not authenticated, show the enter your name form. */}
-    {!auth && <Auth/>}
+    {!isAuthenticated && <Auth/>}
 
     {/* show the input window  */}
-    {auth && <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">User control window</h2>
-      <p>This is the content of user control window</p>
+    {isAuthenticated && <div className="bg-white p-6 rounded-lg shadow-md">
       <Inputs />
       <CurrentRound />
+      <Speed />
     </div>
     }
       
