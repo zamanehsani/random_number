@@ -8,18 +8,18 @@ function Inputs() {
 
   return ( 
     <div className="flex flex-col w-full max-w-md mx-auto  rounded-lg">
-      <div className="flex  w-full mb-4">
-        <input type="text"
+      <div className="flex  w-full mb-4 gap-x-2">
+        <input type="number"
           placeholder="Points"
           className="w-full md:w-1/2 p-2 border border-gray-300 rounded-md mb-2 md:mb-0 md:mr-2"
         />
-        <input type="text"
+        <input type="number"
           placeholder="Multiplier"
-          className="w-full md:w-1/2 p-2 border border-gray-300 rounded-md"
+          className="w-full md:w-1/2 p-2 border border-gray-300 rounded-md mb-2 md:mb-0 md:mr-2"
         />
       </div>
       <div className="w-full">
-        <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+        <button className="w-full bg-indigo-500 text-white py-2 rounded-md hover:bg-indigo-600">
           Start
         </button>
       </div>

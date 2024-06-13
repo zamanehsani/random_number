@@ -7,9 +7,7 @@ function GraphWindow() {
   return (
     <div className="flex flex-wrap">
       <Stats />
-
-        <Graph />
-    
+      <Graph />
     </div>
    );
 }
