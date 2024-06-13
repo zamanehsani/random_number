@@ -1,10 +1,27 @@
 import {useSelector} from 'react-redux';
-
+import { useEffect, useState } from 'react';
 function Stats() {
   const auth = useSelector((state:any) => state.auth);
 
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (date: Date) => {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
   return ( 
-    <div className="flex flex-nowrap w-full justify-center gap-4 ">
+    <div className="flex flex-nowrap w-full justify-center gap-4">
       <div className="w-1/3 bg-gray-200 p-4 px-8 rounded-lg shadow-md flex items-center justify-center ">
         <div className="pr-3">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
@@ -27,7 +44,7 @@ function Stats() {
             <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" />
           </svg>
         </div>
-        <p className="px-2">{new Date().toLocaleTimeString()}</p>
+        <p className="px-2">{formatTime(time)}</p>
       </div>
     </div>
   );

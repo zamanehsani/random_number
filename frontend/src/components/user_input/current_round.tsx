@@ -14,9 +14,9 @@ const data = [
 return (
   <div className="flex flex-col items-start w-full max-w-lg mx-auto p-2 rounded-lg my-3">
       <h2 className="text-lg font-semibold mb-1">Current Round</h2>
-      <div className="overflow-x-auto w-full">
+      <div className="overflow-x-auto w-full overflow-auto max-h-40 ">
         <table className="min-w-full border-collapse overflow-hidden rounded-md border-1 border-slate-400 ">
-          <thead>
+          <thead >
             <tr className="bg-gray-100 text-gray-700 border-b border-gray-200">
               <th className="text-left py-1 px-4">Name</th>
               <th className="text-left py-1 px-4">Points</th>

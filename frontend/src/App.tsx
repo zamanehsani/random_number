@@ -1,12 +1,10 @@
 import './App.css'
 import InputCard from './components/user_input';
 import GraphWindow from './components/graph';
-import ChatWindow from './components/chat';
+import ChatWindow from './components/chat/chat_window';
 import RankingWindow from './components/ranking';
 
 function App() {
-
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-slate-300 p-4">
       <main className="w-full max-w-screen-xl flex flex-col gap-2">
