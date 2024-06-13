@@ -1,9 +1,12 @@
 
-
 function Graph() {
-  return ( <div className="flex">
-    <p>Graph comes here...</p>
-  </div> );
+
+
+
+return (
+    <div className="flex items-center justify-center  h-96 w-96">
+    </div>
+  );
 }
 
 export default Graph;
