@@ -1,13 +1,25 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from "../../redux/store";
+import { login } from "../../redux/authSlice";
 
 function Auth() {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit =(e:any)=>{
+    /** this function authenticate the user */
     e.preventDefault();
-    console.log("form", name)
+    dispatch(login(name));
   }
+
+
+
+  useEffect(()=>{
+    /** This is to clean the unused resources while not being rendered */
+    return ()=>{setName("");}
+  },[])
+
   return ( 
     <div className="flex flex-col bg-white p-2 py-4 rounded-lg shadow-md items-center justify-center">
       <h2 className=" font-bold text-2xl my-8 ">Welcome</h2>

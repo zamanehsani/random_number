@@ -4,7 +4,6 @@ import GraphWindow from './components/graph';
 import ChatWindow from './components/chat';
 import RankingWindow from './components/ranking';
 
-
 function App() {
 
 
