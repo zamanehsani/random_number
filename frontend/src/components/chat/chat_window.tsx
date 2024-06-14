@@ -7,11 +7,9 @@ const ChatWindow:React.FC = () => {
   const auth = useSelector((state:any)=>state.auth);
   const [chatMessages, setChatMessages] = useState<ChatEvent[]>([]);
 
-  const SERVER_URL = 'http://localhost:3000';
-
   useEffect(() => {
     if (auth.isAuthenticated){
-      socketService.connect(SERVER_URL);
+      socketService.connect(import.meta.env.VITE_BASE_URL);
       socketService.on('chat', (message: any) => {
         setChatMessages(prevMessages => [...prevMessages, message.body]);
       });

@@ -34,6 +34,7 @@ class SocketService {
   public on(event: 'chat', callback: (data: ChatEvent) => void): void;
   public on(event: 'poll', callback: (data: PollEvent) => void): void;
   public on(event: 'rank', callback: (data: RankEvent) => void): void;
+
   public on(event: string, callback: (data: any) => void): void {
     if (this.socket) {
       this.socket.on(event, callback);
@@ -46,11 +47,14 @@ class SocketService {
     }
   }
 
-  public emit(event: 'chat', data: ChatEvent): void {
+  public emit(event: 'chat', data: ChatEvent): void;
+  public emit(event: 'poll', data: PollEvent): void;
+  public emit(event: string, data: any): void {
     if (this.socket) {
       this.socket.emit(event, data);
     }
   }
+
 
   public disconnect(): void {
     if (this.socket) {

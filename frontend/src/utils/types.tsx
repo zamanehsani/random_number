@@ -5,9 +5,9 @@ export type ChatEvent = {
   message: string;
 };
 export type PollEvent = {
-  question: string;
-  options: string[];
-  votes: number[];
+  name?: string;
+  points?: number;
+  multiplier?: number;
 };
 export type RankEvent = {
   user: string;

@@ -16,7 +16,7 @@ export class MyGateway implements OnModuleInit{
 
   onModuleInit() {
     this.server.on('connection', (socket)=>{
-      console.log("connected.", socket);
+      console.log("connected.", socket.id);
     })
   }
 

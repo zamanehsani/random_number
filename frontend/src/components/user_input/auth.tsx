@@ -5,6 +5,7 @@ import { login } from "../../redux/authSlice";
 
 function Auth() {
   const [name, setName] = useState("");
+
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit =(e:any)=>{
@@ -12,8 +13,6 @@ function Auth() {
     e.preventDefault();
     dispatch(login(name));
   }
-
-
 
   useEffect(()=>{
     /** This is to clean the unused resources while not being rendered */
