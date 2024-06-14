@@ -9,8 +9,7 @@ function Inputs() {
   const [points, setPoints] = useState('');
   const [multiplier, setMultiplier] = useState('');
 
-
-  const handleStart =()=>{
+  const handleStart = ()=>{
 
     const poll: PollEvent = { name:auth.user_name, points:parseFloat(points), multiplier:parseFloat(multiplier) };
     socketService.emit('poll', poll);
