@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, FormEvent } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import socketService from '../../utils/socket';
 import { ChatEvent } from '../../utils/types';
 import { useSelector } from 'react-redux';
