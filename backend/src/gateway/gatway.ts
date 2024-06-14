@@ -23,29 +23,25 @@ export class MyGateway implements OnModuleInit{
 
   // let the users listen to event of chat
   @SubscribeMessage('chat')
-  onChat(@MessageBody() body:any){
+  handleChat(@MessageBody() body:any){
     console.log("chat: ",body)
 
     // send the user messages back to the chat event
-    this.server.emit('chat', {
-      body
-    })
+    this.server.emit('chat', {body})
   }
 
   // make the ranking event
   @SubscribeMessage('ranking')
-  onRanking(@MessageBody() body:any){
+  handleRanking(@MessageBody() body:any){
     console.log("ranking",body )
 
     // send the user messages back
-    this.server.emit('ranking', {
-      body
-    })
+    this.server.emit('ranking', {body})
   }
 
   // make the current poll event
   @SubscribeMessage('poll')
-  onPoll(@MessageBody() body:any){
+  handlePoll(@MessageBody() body:any){
     console.log("poll ",body )
 
     // send the user messages back
