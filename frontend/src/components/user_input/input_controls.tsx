@@ -3,13 +3,14 @@ import { PollEvent } from '../../utils/types';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { names } from '../../utils/names';
+import { RootState } from '../../utils/types';
 
 function Inputs() {
-  const auth = useSelector((state:any)=>state.auth);
-  const [points, setPoints] = useState('');
-  const [multiplier, setMultiplier] = useState('');
+  const auth = useSelector((state:RootState)=>state.auth);
+  const [points, setPoints] = useState<string>('');
+  const [multiplier, setMultiplier] = useState<string>('');
 
-  const handleStart = ()=>{
+  const handleStart = () =>{
 
     const poll: PollEvent = { name:auth.user_name, points:parseFloat(points), multiplier:parseFloat(multiplier) };
     socketService.emit('poll', poll);
@@ -31,7 +32,7 @@ function Inputs() {
       // end of for block
     }
 
-    return () => { socketService.disconnect();};
+    return () => {socketService.disconnect();};
   }
 
 

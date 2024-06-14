@@ -1,9 +1,11 @@
 import {useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
-function Stats() {
-  const auth = useSelector((state:any) => state.auth);
+import { RootState } from '../../utils/types';
 
-  const [time, setTime] = useState(new Date());
+function Stats() {
+  const auth = useSelector((state:RootState) => state.auth);
+
+  const [time, setTime] = useState<Date>(new Date());
 
   useEffect(() => {
     const timer = setInterval(() => {

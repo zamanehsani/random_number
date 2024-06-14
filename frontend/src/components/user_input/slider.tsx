@@ -6,7 +6,8 @@ function Speed() {
     steps.push(i.toFixed(1));
   }
 
-  const [speed, setSpeed] = useState(1.0);
+  const [speed, setSpeed] = useState<number>(1.0);
+
   return ( 
     <div className="flex flex-col items-start w-full max-w-md mx-auto bg-white p-2 rounded-lg ">
       <div className="flex">

@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import socketService from '../../utils/socket';
-import { ChatEvent } from '../../utils/types';
+import { ChatEvent, RootState } from '../../utils/types';
 import { useSelector } from 'react-redux';
 
 const ChatWindow:React.FC = () => {
-  const auth = useSelector((state:any)=>state.auth);
+  const auth = useSelector((state:RootState)=>state.auth);
   const [chatMessages, setChatMessages] = useState<ChatEvent[]>([]);
 
   useEffect(() => {
       socketService.connect(import.meta.env.VITE_BASE_URL);
-      socketService.on('chat', (message: any) => {
+      socketService.on('chat', (message: {body:ChatEvent}) => {
         setChatMessages(prevMessages => [...prevMessages, message.body]);
       });
 
@@ -17,7 +17,7 @@ const ChatWindow:React.FC = () => {
   }, []);
 
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState<string>('');
   const messageEndRef = useRef<HTMLDivElement>(null);
 
   const handleSend = () => {

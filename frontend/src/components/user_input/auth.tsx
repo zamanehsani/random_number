@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from "../../redux/store";
 import { login } from "../../redux/authSlice";
 
 function Auth() {
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>("");
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleSubmit =(e:any)=>{
+  const handleSubmit =(e:React.FormEvent<HTMLFormElement>)=>{
     /** this function authenticate the user */
     e.preventDefault();
     dispatch(login(name));

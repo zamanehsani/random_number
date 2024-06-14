@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 
 function CurrentRound() {
   const [polls, setPolls] = useState<PollEvent[]>([]);
-  const [CurrentPoll, setCurrentPoll] = useState('');
-  const [random_number, setRandom_number] = useState('');
+  const [CurrentPoll, setCurrentPoll] = useState<string>('');
+  const [random_number, setRandom_number] = useState<string>('');
 
   useEffect(() => {
       socketService.connect(import.meta.env.VITE_BASE_URL);
-      socketService.on('poll', (poll: any) => {setPolls(prevPolls => [...prevPolls, poll.body]);});
+      socketService.on('poll', (poll:{body:PollEvent}) => {setPolls(prevPolls => [...prevPolls, poll.body]);});
       socketService.on('poll_participation', (data) => {setCurrentPoll(data.ngeId);});
 
       // Listen for NGE event

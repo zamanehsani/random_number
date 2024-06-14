@@ -1,11 +1,5 @@
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-export interface StateType {
-    user_name?: string; 
-    points?:number;
-    isAuthenticated?: boolean;
-  }
+import { StateType } from "../utils/types";
 
 const initialState:StateType = {
     user_name: "",
