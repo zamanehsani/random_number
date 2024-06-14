@@ -37,7 +37,7 @@ function Stats() {
           </svg>
         </div>
         {/* trancate name that are longer */}
-        {(auth.isAuthenticated) ? <p>{auth?.user_name.slice(0, 12) + '...'}</p> : null}
+        {(auth.isAuthenticated) ? <p>{auth?.user_name}</p> : null}
       </div>
       <div className="w-1/3 bg-gray-200 p-4 px-8 rounded-lg shadow-md flex items-center justify-center ">
         <div className="pr-3">

@@ -1,22 +1,39 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, FormEvent } from 'react';
+import socketService from '../../utils/socket';
+import { ChatEvent } from '../../utils/types';
+import { useSelector } from 'react-redux';
 
-const ChatWindow = () => {
-  const [messages, setMessages] = useState([
-    { id: 1, name: 'Alice', text: 'Hello!' },
-    { id: 2, name: 'Bob', text: 'Hi Alice!' },
-    { id: 3, name: 'Alice', text: 'How are you?' }
-  ]);
+const ChatWindow:React.FC = () => {
+  const auth = useSelector((state:any)=>state.auth);
+  const [chatMessages, setChatMessages] = useState<ChatEvent[]>([]);
+
+  const SERVER_URL = 'http://localhost:3000';
+
+  useEffect(() => {
+    if (auth.isAuthenticated){
+      socketService.connect(SERVER_URL);
+      socketService.on('chat', (message: any) => {
+        setChatMessages(prevMessages => [...prevMessages, message.body]);
+      });
+    }
+
+    return () => { socketService.disconnect();};
+  }, [auth,]);
+
+
   const [input, setInput] = useState('');
   const messageEndRef = useRef<HTMLDivElement>(null);
 
   const handleSend = () => {
+    // trim and send to the server...
     if (input.trim()) {
       const newMessage = {
-        id: messages.length + 1,
-        name: 'You',
-        text: input
+        user_name: auth.user_name,
+        message: input
       };
-      setMessages([...messages, newMessage]);
+
+      const chatMessage: ChatEvent = { ...newMessage };
+      socketService.emit('chat', chatMessage);
       setInput('');
     }
   };
@@ -25,7 +42,7 @@ const ChatWindow = () => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages]);
+  }, [chatMessages]);
 
   return (
     <div className='flex flex-col w-full justify-center p-2'>
@@ -39,10 +56,10 @@ const ChatWindow = () => {
         </div>
         <div className="flex-1 overflow-auto max-h-48 min-h-48 bg-white p-4 rounded-lg ">
           <div className="space-y-1">
-            {messages.map((msg) => (
-              <div key={msg.id} className="flex flex-row">
-                <span className="font-semibold text-indigo-700 ">{msg.name} : </span>
-                <span className="text-gray-600"> { msg.text}</span>
+            {chatMessages.map((msg, index) => (
+              <div key={index} className="flex flex-row">
+                <span className="font-semibold text-indigo-700 ">{msg.user_name} : </span>
+                <span className="text-gray-600"> { msg.message}</span>
               </div>
             ))}
             <div ref={messageEndRef} />

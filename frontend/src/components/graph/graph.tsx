@@ -20,11 +20,12 @@ ChartJS.register(
 );
 
 const Graph: React.FC = () => {
+
   const data: ChartData<'line'> = {
     labels: [0,1,2,3,4,5,6,7,8,9,10],
     datasets: [
       {
-        data: [3, 2, 2, 1, 5, 4,5,6,7,8,9],
+        data: [0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1, 1.3, 1.5, 2, 2.5, 3, 4, 4, 5, 6, 7, 8, 9,10],
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
       },
@@ -34,7 +35,7 @@ const Graph: React.FC = () => {
   const options: ChartOptions<'line'> = {
     responsive: true,
     animation: {
-      duration: 5000, // Animation duration in milliseconds
+      duration: 100, // Animation duration in milliseconds
       easing: 'easeInOutBounce', // Easing function
     },
     scales: {
