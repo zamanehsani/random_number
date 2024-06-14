@@ -1,10 +1,11 @@
 import socketService from '../../utils/socket';
 import { PollEvent } from '../../utils/types';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
+
 function CurrentRound() {
-  const auth = useSelector((state:any)=>state.auth);
+  // const auth = useSelector((state:any)=>state.auth);
   const [polls, setPolls] = useState<PollEvent[]>([]);
   
   // import the global states here.
@@ -12,15 +13,9 @@ function CurrentRound() {
   useEffect(() => {
       socketService.connect(import.meta.env.VITE_BASE_URL);
       socketService.on('poll', (poll: any) => {
-        console.log("new poll member:", poll.body)
         setPolls(prevPolls => [...prevPolls, poll.body]);
       });
     
-    const poll: PollEvent = { name:auth.user_name, points:1000, multiplier:12.5 };
-    socketService.emit('poll', poll);
-
-    // create random player to join the poll
-
     return () => { socketService.disconnect();};
   },[]);
 

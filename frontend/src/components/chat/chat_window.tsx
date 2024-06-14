@@ -8,15 +8,13 @@ const ChatWindow:React.FC = () => {
   const [chatMessages, setChatMessages] = useState<ChatEvent[]>([]);
 
   useEffect(() => {
-    if (auth.isAuthenticated){
       socketService.connect(import.meta.env.VITE_BASE_URL);
       socketService.on('chat', (message: any) => {
         setChatMessages(prevMessages => [...prevMessages, message.body]);
       });
-    }
 
     return () => { socketService.disconnect();};
-  }, [auth,]);
+  }, []);
 
 
   const [input, setInput] = useState('');

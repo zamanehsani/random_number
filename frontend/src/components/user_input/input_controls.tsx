@@ -1,25 +1,56 @@
-import { useState } from "react";
-
+import socketService from '../../utils/socket';
+import { PollEvent } from '../../utils/types';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { names } from '../../utils/names';
 
 function Inputs() {
+  const auth = useSelector((state:any)=>state.auth);
   const [points, setPoints] = useState('');
   const [multiplier, setMultiplier] = useState('');
-  
+
+
+  const handleStart =()=>{
+
+    const poll: PollEvent = { name:auth.user_name, points:parseFloat(points), multiplier:parseFloat(multiplier) };
+    socketService.emit('poll', poll);
+    
+    // create 4 random players to join the poll
+    for(let i=1; i<=4; i++){
+
+      const randomNumber = Math.random() * 10;
+      // Get the integer part of the randomNumber
+      const integerPart = Math.floor(randomNumber);
+      const decimalPart = randomNumber - integerPart;
+      
+      const poll: PollEvent = { 
+        name: names[Math.floor(Math.random() * names.length)], 
+        points: Math.floor(Math.random() * 1000) + 1, 
+        multiplier: parseFloat( decimalPart.toFixed(2))
+      };
+
+      socketService.emit('poll', poll);
+
+      // end of for block
+    }
+
+    return () => { socketService.disconnect();};
+  }
 
   return ( 
     <div className="flex flex-col w-full max-w-md mx-auto  rounded-lg">
       <div className="flex  w-full mb-4 gap-x-2">
-        <input type="number"
+        <input type="number" onChange={(e)=>setPoints(e.target.value)}
           placeholder="Points"
           className="w-full md:w-1/2 p-2 border border-gray-300 rounded-md mb-2 md:mb-0 md:mr-2"
         />
-        <input type="number"
+        <input type="number" onChange={(e)=>setMultiplier(e.target.value)}
           placeholder="Multiplier"
           className="w-full md:w-1/2 p-2 border border-gray-300 rounded-md mb-2 md:mb-0 md:mr-2"
         />
       </div>
       <div className="w-full">
-        <button className="w-full bg-indigo-500 text-white py-2 rounded-md hover:bg-indigo-600">
+        <button onClick={()=>handleStart()} className="w-full bg-indigo-500 text-white py-2 rounded-md hover:bg-indigo-600">
           Start
         </button>
       </div>
