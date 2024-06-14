@@ -1,6 +1,5 @@
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from 'axios'; 
 
 export interface StateType {
     user_name?: string; 
@@ -29,33 +28,12 @@ const authSlice = createSlice({
         .addCase(login.rejected, (state)=>{
             state.isAuthenticated = false;
         })
-        
-        .addCase(logout.fulfilled, (state)=>{
-            state.isAuthenticated = false;
-            state.user_name = "";
-        })
-        .addCase(logout.pending, (state)=>{
-            state.isAuthenticated = false;
-        })
-        .addCase(logout.rejected, (state)=>{
-            state.isAuthenticated = false;
-        })
-
     }
 });
 
 export const login = createAsyncThunk(
     'auth/login',
-    async (name:string) => {
-        // const response = await axios.post("loginUrl", credentials);
-        return name;
-    }
-);
-
-
-export const logout = createAsyncThunk(
-    'auth/logout',
-    async () => { return null;}
+    async (name:string) => {return name;}
 );
 
 export default authSlice.reducer;
