@@ -1,5 +1,6 @@
 // ChartComponent.tsx
 import React from 'react';
+
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -19,7 +20,9 @@ ChartJS.register(
   LineElement,
 );
 
+
 const Graph: React.FC = () => {
+
 
   const data: ChartData<'line'> = {
     labels: [0,1,2,3,4,5,6,7,8,9,10],
